@@ -15,16 +15,23 @@ public class Graphs extends JFrame {
     private JComboBox<String> cityComboBox;
     private JComboBox<String> chartTypeComboBox;
     private JButton saveButton;
+    private JButton generateButton;
+    private JPanel chartPanel;
 
+    // Listas para almacenar las respuestas
     private List<String> genders = new ArrayList<>();
     private List<String> ageRanges = new ArrayList<>();
     private List<String> cities = new ArrayList<>();
 
     public Graphs() {
         setTitle("Visualización de Datos");
-        setSize(500, 250);
+        setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(5, 2));
+        setLayout(new BorderLayout());
+
+        // Panel superior para los filtros y el botón de guardar
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new GridLayout(5, 2));
 
         genderComboBox = new JComboBox<>(new String[]{"Hombre", "Mujer"});
         ageRangeComboBox = new JComboBox<>(new String[]{"<18", "18-35", "35-50", "50+"});
@@ -42,22 +49,44 @@ public class Graphs extends JFrame {
             }
         });
 
-        // Agregar componentes
-        add(new JLabel("Género:"));
-        add(genderComboBox);
-        add(new JLabel("Rango de Edad:"));
-        add(ageRangeComboBox);
-        add(new JLabel("Ciudad:"));
-        add(cityComboBox);
-        add(new JLabel("Tipo de Gráfico:"));
-        add(chartTypeComboBox);
-        add(saveButton);
+        // Botón para generar gráficos (sin lógica aún)
+        generateButton = new JButton("Generar Gráfico");
+        generateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Aquí se generarán los gráficos (lógica en la siguiente versión)
+                JOptionPane.showMessageDialog(Graphs.this, "Se generará el gráfico.");
+            }
+        });
+
+        // Panel para gráficos
+        chartPanel = new JPanel();
+        chartPanel.setLayout(new BorderLayout());
+
+        // Agregar componentes al panel de entrada
+        inputPanel.add(new JLabel("Género:"));
+        inputPanel.add(genderComboBox);
+        inputPanel.add(new JLabel("Rango de Edad:"));
+        inputPanel.add(ageRangeComboBox);
+        inputPanel.add(new JLabel("Ciudad:"));
+        inputPanel.add(cityComboBox);
+        inputPanel.add(new JLabel("Tipo de Gráfico:"));
+        inputPanel.add(chartTypeComboBox);
+        inputPanel.add(saveButton);
+        inputPanel.add(generateButton);
+
+        // Agregar paneles a la ventana principal
+        add(inputPanel, BorderLayout.NORTH);
+        add(chartPanel, BorderLayout.CENTER);
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Graphs().setVisible(true));
     }
 }
+
+
+
 
 
 
