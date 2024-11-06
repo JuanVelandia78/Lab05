@@ -3,6 +3,10 @@ package graphs;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Graphs extends JFrame {
 
@@ -10,6 +14,9 @@ public class Graphs extends JFrame {
     private JComboBox<String> ageRangeComboBox;
     private JComboBox<String> cityComboBox;
     private JButton saveButton;
+    private List<String> genders = new ArrayList<>();
+    private List<String> ageRanges = new ArrayList<>();
+    private List<String> cities = new ArrayList<>();
 
     public Graphs() {
         setTitle("Visualización de Datos");
@@ -22,6 +29,15 @@ public class Graphs extends JFrame {
         cityComboBox = new JComboBox<>(new String[]{"Bogotá", "Medellín", "Cali"});
 
         saveButton = new JButton("Guardar Respuesta");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                genders.add((String) genderComboBox.getSelectedItem());
+                ageRanges.add((String) ageRangeComboBox.getSelectedItem());
+                cities.add((String) cityComboBox.getSelectedItem());
+                JOptionPane.showMessageDialog(Graphs.this, "Respuesta guardada exitosamente.");
+            }
+        });
 
         add(new JLabel("Género:"));
         add(genderComboBox);
@@ -36,6 +52,7 @@ public class Graphs extends JFrame {
         SwingUtilities.invokeLater(() -> new Graphs().setVisible(true));
     }
 }
+
 
 
 
